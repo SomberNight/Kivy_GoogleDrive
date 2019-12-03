@@ -52,7 +52,7 @@ class FunctionalProxyHttpTest(unittest.TestCase):
             # TODO use subprocess.check_call when 2.4 is dropped
             ret = subprocess.call(['tinyproxy', '-c', self.conffile])
             self.assertEqual(0, ret)
-        except OSError, e:
+        except OSError as e:
             if e.errno == errno.ENOENT:
                 raise nose.SkipTest('tinyproxy not available')
             raise
@@ -62,11 +62,11 @@ class FunctionalProxyHttpTest(unittest.TestCase):
         try:
             pid = int(open(self.pidfile).read())
             os.kill(pid, signal.SIGTERM)
-        except OSError, e:
+        except OSError as e:
             if e.errno == errno.ESRCH:
-                print '\n\n\nTinyProxy Failed to start, log follows:'
-                print open(self.logfile).read()
-                print 'end tinyproxy log\n\n\n'
+                print('\n\n\nTinyProxy Failed to start, log follows:')
+                print(open(self.logfile).read())
+                print('end tinyproxy log\n\n\n')
             raise
         map(os.unlink, (self.pidfile,
                         self.logfile,

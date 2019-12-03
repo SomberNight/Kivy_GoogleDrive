@@ -6,8 +6,8 @@ from kivy.uix.label import Label
 from kivy.app import App
 
 
-import sys
-sys.path.append('GoogleNetworking')
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(__file__), 'GoogleNetworking'))
 from googleapiclient.http import MediaFileUpload
 from googleapiclient import errors
 
@@ -49,7 +49,7 @@ def get_file_download_url(file_name, drive_service_object):
 
 class MakeFolderScreen(GridLayout):
     def authenticate(self):
-        from google_drive_handler import GoogleDriveHandler
+        from .google_drive_handler import GoogleDriveHandler
         print('current working directory: ' + os.getcwd())
         self.drive_handler = GoogleDriveHandler(sys.argv)
         print('authentication successful and drive object is created. \n')
